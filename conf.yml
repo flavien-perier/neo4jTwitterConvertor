@@ -1,5 +1,5 @@
 app:
-  track: "#google, #amazon, #faceboof, #apple, #microsoft, #orange"
+  track: "twitter"
   production: false
   authorizedLanguages:
     - "fr"
@@ -7,9 +7,9 @@ app:
 neo4j:
   uri: "bolt://127.0.0.1:7687"
   user: "neo4j"
-  password: "password"
+  password: "neo4j"
 twitterApi:
-  consumer_key: 'K7hbc2i8NHLJ4QsRyXebqo58j'
-  consumer_secret: 'omc3RgjndD3kMiyM1JzwGBai1ILpFGcPQSXBThNwaln6tDBrgm'
-  access_token_key: '2938142309-lvP8oP3epnPMJFrALnEKD7br1X4JgmzhAqqbDkV'
-  access_token_secret: 'yYnVbAqegbgQq1Zh3eVeK92NGcoOrfejfzyhH8HmepXDi'
+  consumer_key: 'consumer_key'
+  consumer_secret: 'consumer_secret'
+  access_token_key: 'access_token_key'
+  access_token_secret: 'access_token_secret'
