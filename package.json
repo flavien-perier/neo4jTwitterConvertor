@@ -1,0 +1,21 @@
+{
+  "name": "neo4j-twitter-convertor",
+  "version": "1.0.0",
+  "description": "Convert twitter flux to neo4j graph",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha ./test/functions/*.js"
+  },
+  "author": "Flavien PERIER",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "3.12.0",
+    "neo4j-driver": "1.6.3",
+    "sentiment": "^5.0.1",
+    "twitter": "1.7.1"
+  },
+  "devDependencies": {
+    "mocha": "5.2.0"
+  }
+}

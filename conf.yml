@@ -1,0 +1,15 @@
+app:
+  track: "#google, #amazon, #faceboof, #apple, #microsoft, #orange"
+  production: false
+  authorizedLanguages:
+    - "fr"
+    - "en"
+neo4j:
+  uri: "bolt://127.0.0.1:7687"
+  user: "neo4j"
+  password: "password"
+twitterApi:
+  consumer_key: 'K7hbc2i8NHLJ4QsRyXebqo58j'
+  consumer_secret: 'omc3RgjndD3kMiyM1JzwGBai1ILpFGcPQSXBThNwaln6tDBrgm'
+  access_token_key: '2938142309-lvP8oP3epnPMJFrALnEKD7br1X4JgmzhAqqbDkV'
+  access_token_secret: 'yYnVbAqegbgQq1Zh3eVeK92NGcoOrfejfzyhH8HmepXDi'
