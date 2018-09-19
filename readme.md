@@ -1,7 +1,5 @@
 # Deploy app
 
-:warning: The neo4j database is cleaned before each start.
-
 ## Configure app
 Create the `conf.yml' file at the root with this example of pattern :
 ```yml
