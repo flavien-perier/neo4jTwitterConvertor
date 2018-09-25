@@ -2,7 +2,7 @@
 
 const formatString = require('../../functions/formatString');
 
-module.exports =  class location {
+module.exports =  class Location {
     constructor(id) {
         this.id = formatString(id);
         this._type = 'Location';

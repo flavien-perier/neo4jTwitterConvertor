@@ -1,12 +1,12 @@
 "use strict";
 
-// (:User)-[]->(:Location)
+// (:Message)-[]->(:Lang)
 
-module.exports = class Localised {
+module.exports = class MessageLang {
     constructor(from, to) {
         this._from = from;
         this._to = to;
-        this._type = 'Localised';
+        this._type = 'MessageLang';
     }
 
     toString() {

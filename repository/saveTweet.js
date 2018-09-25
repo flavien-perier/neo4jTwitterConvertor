@@ -1,11 +1,14 @@
 "use strict";
 
 const Location = require('../model/node/Location');
+const Lang = require('../model/node/Lang');
 const Hashtag = require('../model/node/Hashtag');
 const Message = require('../model/node/Message');
 const User = require('../model/node/User');
 
 const Localised = require('../model/relation/Localised');
+const UserLang = require('../model/relation/UserLang');
+const MessageLang = require('../model/relation/MessageLang');
 const Content = require('../model/relation/Content');
 const Tweet = require('../model/relation/Tweet');
 const ReTweet = require('../model/relation/ReTweet');
@@ -51,9 +54,24 @@ module.exports = async (neo4jSession, tweet) => {
         if (tweet.user.location && user._newValue) {
             const location = new Location(tweet.user.location);
             await findOrCreateNode(neo4jSession, location);
-            const localised = new Localised(user, location, tweet.user.lang);
+            const localised = new Localised(user, location);
             await createRelation(neo4jSession, localised);
         }
+
+        if (tweet.user.lang) {
+            const userLang = new Lang(tweet.user.lang);
+            await findOrCreateNode(neo4jSession, userLang);
+            const userLangRelaton = new UserLang(user, userLang);
+            await createRelation(neo4jSession, userLangRelaton);
+        }
+
+        if (tweet.lang) {
+            const messageLang = new Lang(tweet.lang);
+            await findOrCreateNode(neo4jSession, messageLang);
+            const messageLangRelaton = new MessageLang(message, messageLang);
+            await createRelation(neo4jSession, messageLangRelaton);
+        }
+        
 
         // Create retweeted relation
         const reTweetRelation = new ReTweet(tweet.created_at);
