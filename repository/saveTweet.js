@@ -58,7 +58,7 @@ module.exports = async (neo4jSession, tweet) => {
             await createRelation(neo4jSession, localised);
         }
 
-        if (tweet.user.lang) {
+        if (tweet.user.lang && user._newValue) {
             const userLang = new Lang(tweet.user.lang);
             await findOrCreateNode(neo4jSession, userLang);
             const userLangRelaton = new UserLang(user, userLang);
