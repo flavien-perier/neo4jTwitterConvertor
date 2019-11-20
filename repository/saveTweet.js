@@ -18,16 +18,12 @@ const extractHashtags = require('../functions/extractHashtags');
 const confFile = require('../conf/confFile');
 
 const findOrCreateNode = async (neo4jSession, object) => {
-    const findObject = await neo4jSession.run(`MATCH (a:${object._type} {id: "${object.id}"}) RETURN a`);
-    if (findObject.records.length === 0) {
-        neo4jSession.run(`CREATE (:${object._type} ${object.toString()})`);
-        object._newValue = true;
-    }
+    neo4jSession.run(`MERGE (:${object._type} ${object.toString()})`);
 }
 
 const createRelation = (neo4jSession, object) => {
     return neo4jSession.run(`MATCH (a:${object._from._type} {id: "${object._from.id}"}), (b:${object._to._type} {id: "${object._to.id}"}) `
-        + `CREATE (a)-[:${object._type} ${object.toString()}]->(b)`);
+        + `MERGE (a)-[:${object._type} ${object.toString()}]->(b)`);
 }
 
 module.exports = async (neo4jSession, tweet) => {
@@ -77,6 +73,6 @@ module.exports = async (neo4jSession, tweet) => {
         const reTweetRelation = new ReTweet(tweet.created_at);
         await neo4jSession.run(`MATCH (a:${message._type}  {id: "${message.id}"}), (b:${message._type}) `
             + `WHERE b.text = a.text AND a.id <> b.id `
-            + `CREATE (a)-[:${reTweetRelation._type} ${reTweetRelation.toString()}]->(b)`);
+            + `MERGE (a)-[:${reTweetRelation._type} ${reTweetRelation.toString()}]->(b)`);
     }
 }
