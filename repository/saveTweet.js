@@ -29,7 +29,7 @@ const createRelation = (neo4jSession, object) => {
 module.exports = async (neo4jSession, tweet) => {
     if (confFile.app.authorizedLanguages.indexOf(tweet.lang) != -1) {
 
-        const user = new User(tweet.user.id_str, tweet.user.name);
+        const user = new User(tweet.user.id_str, tweet.user.name, tweet.user.screen_name);
         await findOrCreateNode(neo4jSession, user);
         
         const message = new Message(tweet.id_str, tweet.text, tweet.created_at, tweet.lang);
