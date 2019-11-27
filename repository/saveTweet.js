@@ -32,7 +32,7 @@ module.exports = async (neo4jSession, tweet) => {
         const user = new User(tweet.user.id_str, tweet.user.name, tweet.user.screen_name);
         await findOrCreateNode(neo4jSession, user);
         
-        const message = new Message(tweet.id_str, tweet.text, tweet.created_at, tweet.lang);
+        const message = new Message(tweet.id_str, tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text, tweet.created_at, tweet.lang);
         await findOrCreateNode(neo4jSession, message);
 
         const tweetRelation = new Tweet(user, message, tweet.created_at);
