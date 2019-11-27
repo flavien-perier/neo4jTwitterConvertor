@@ -7,7 +7,6 @@ module.exports = class User {
         this.id = id;
         this.name = formatString(name);
         this._type = 'User';
-        this._newValue = false;
     }
 
     toString() {

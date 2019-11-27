@@ -32,7 +32,7 @@ module.exports = async (neo4jSession, tweet) => {
         const user = new User(tweet.user.id_str, tweet.user.name);
         await findOrCreateNode(neo4jSession, user);
         
-        const message = new Message(tweet.id_str, tweet.text, tweet.lang);
+        const message = new Message(tweet.id_str, tweet.text, tweet.created_at, tweet.lang);
         await findOrCreateNode(neo4jSession, message);
 
         const tweetRelation = new Tweet(user, message, tweet.created_at);
@@ -47,14 +47,14 @@ module.exports = async (neo4jSession, tweet) => {
         });
 
         // Create location
-        if (tweet.user.location && user._newValue) {
+        if (tweet.user.location) {
             const location = new Location(tweet.user.location);
             await findOrCreateNode(neo4jSession, location);
             const localised = new Localised(user, location);
             await createRelation(neo4jSession, localised);
         }
 
-        if (tweet.user.lang && user._newValue) {
+        if (tweet.user.lang) {
             const userLang = new Lang(tweet.user.lang);
             await findOrCreateNode(neo4jSession, userLang);
             const userLangRelaton = new UserLang(user, userLang);
@@ -68,11 +68,13 @@ module.exports = async (neo4jSession, tweet) => {
             await createRelation(neo4jSession, messageLangRelaton);
         }
         
-
         // Create retweeted relation
         const reTweetRelation = new ReTweet(tweet.created_at);
-        await neo4jSession.run(`MATCH (a:${message._type}  {id: "${message.id}"}), (b:${message._type}) `
+        await neo4jSession.run(`MATCH (a:Message) `
+            + `WITH MIN(a.date) AS minDate `
+            + `MATCH (a:${message._type}  {id: "${message.id}"}), (b:${message._type}) `
             + `WHERE b.text = a.text AND a.id <> b.id `
+            + `AND b.date = minDate `
             + `MERGE (a)-[:${reTweetRelation._type} ${reTweetRelation.toString()}]->(b)`);
     }
 }
