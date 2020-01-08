@@ -7,7 +7,7 @@
     "start": "node index.js",
     "test": "mocha ./test/functions/*.js"
   },
-  "author": "Flavien PERIER",
+  "author": "Flavien PERIER <perier@flavien.cc>",
   "license": "MIT",
   "dependencies": {
     "js-yaml": "3.13.1",

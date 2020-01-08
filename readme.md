@@ -1,6 +1,7 @@
 # Deploy app
 
 ## Configure app
+
 Create the `conf.yml' file at the root with this example of pattern :
 ```yml
 app:
@@ -22,6 +23,7 @@ twitterApi:
 :warning: If the production mode is set to "false", the database is cleaned at startup.
 
 ## Install the dependencies and start the application
+
 Use the commands :
 ```sh
 npm install
