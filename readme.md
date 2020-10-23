@@ -1,3 +1,5 @@
+![license](https://badgen.net/github/license/flavien-perier/neo4j-twitter-convertor)
+
 # Deploy app
 
 ## Configure app
